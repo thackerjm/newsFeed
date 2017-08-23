@@ -2,10 +2,18 @@
   background-color: black
 }
 
-#kyivPost h3 {
+h3 {
   text-align: center
 }
 
 ul {
   list-style:none
+}
+
+img {
+  width: 100px
+}
+
+.artTitle {
+  font-size:20px
 }
