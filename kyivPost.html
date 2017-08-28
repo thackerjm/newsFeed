@@ -1,0 +1,14 @@
+<div ng-controller="kyivPostControl" class="feed">
+<h3>Kyiv Post Top Stories</h3>
+
+<ul>
+    <li ng-repeat="kArticle in kyivPostArticles.slice(((kPagination.kcurrentPage-1)*kPagination.itemsPerPage), ((kPagination.kcurrentPage)*kPagination.itemsPerPage))" class="table">
+      <a href="{{ kArticle.articleURL }}" target="_blank">
+          <img src=" {{ kArticle.articleIMG }} "> <span class="artTitle">{{ kArticle.articleTitle }} </span>
+      </a>
+    </li>
+</ul>
+
+<pagination total-items="kyivPostArticles.length" ng-model="kPagination.kcurrentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="kPagination.itemsPerPage" max-size="kPagination.maxSize"></pagination>
+
+</div>
