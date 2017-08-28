@@ -4,60 +4,57 @@
     <title>News Feed</title>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
-    <script src="//code.angularjs.org/1.3.0-rc.2/angular.min.js"></script>
-    <script src="//code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
+    <script src="//code.angularjs.org/1.6.6/angular.js"></script>
+    <script src="//code.angularjs.org/1.6.6/angular-route.js"></script>
+    <script src="//code.angularjs.org/1.6.6/angular-resource.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
     <script src="app.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="news.css" />
 </head>
 <body>
-  <header>
+  <!-- <header>
 <nav class="navbar navbar-default">
 <div class="container">
   <div class="navbar-header">
     <a class="navbar-brand" href="/newsFeed/index.htm"> News Feed</a>
   </div>
 
-  <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right">
     <li><a href="#"><i class="fa fa-home"></i> Feed</a></li>
     <li><a href="http://www.nytimes.com"><i></i> NY Times</a></li>
   </ul>
 </div>
 </nav>
-</header>
+</header> -->
+<div ng-controller="feedToggle">
+<div class="nav-side-menu">
+    <div class="brand"> feedMe</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-  <div class="container">
+        <div class="menu-list">
 
-  <div ng-controller="feedController" class="feed">
-    <h3>NY Times Top Stories</h3>
-    <ul>
-  <li ng-repeat="article in newsArticles.slice(((pagination.currentPage-1)*pagination.itemsPerPage), ((pagination.currentPage)*pagination.itemsPerPage))" class="table">
-        <a href="{{ article.url }}" target="_blank">
-            <img src=" {{ article.multimedia[0].url }} "> <span  class="artTitle">{{ article.title }} </span>
-        </a>
-        </li>
-    </ul>
+            <ul id="menu-content" class="menu-content collapse out">
 
-    <pagination total-items="newsArticles.length" ng-model="pagination.currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"></pagination>
+                <li data-toggle="collapse" ng-click='newsToggle("kyivPostToggle")'>
+                  <i class="fa fa-globe fa-lg"></i> KyivPost
+                </li>
 
-  </div>
+                <li  data-toggle="collapse" ng-click='newsToggle("nyTimesToggle")'>
+                  <i class="fa fa-gift fa-lg"></i> New York Times
+                </li>
 
-  <div ng-controller="kyivPostControl" class="feed">
-    <h3>Kyiv Post Top Stories</h3>
+            </ul>
+     </div>
+</div>
 
-    <ul>
-        <li ng-repeat="article in kyivPostArticles.slice(((kPagination.kcurrentPage-1)*kPagination.itemsPerPage), ((kPagination.kcurrentPage)*kPagination.itemsPerPage))" class="table">
-          <a href="{{ article.articleURL }}" target="_blank">
-              <img src=" {{ article.articleIMG }} "> <span class="artTitle">{{ article.articleTitle }} </span>
-          </a>
-        </li>
-    </ul>
+<div id='feedContainer' class='col-md-9'>
 
-    <pagination total-items="kyivPostArticles.length" ng-model="kPagination.kcurrentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="kPagination.itemsPerPage" max-size="kPagination.maxSize"></pagination>
+<kp-feed data='kArticle' ng-if='toggleSwitch === "kyivPostToggle"'></kp-feed>
 
-  </div>
+<feed-component data='article' ng-if='toggleSwitch === "nyTimesToggle"'></feed-component>
 
+</div>
 </div>
 </body>
 </html>

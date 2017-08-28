@@ -1,0 +1,14 @@
+<div ng-controller="feedController" class="feed">
+<h3>NY Times Top Stories</h3>
+<ul>
+<li ng-repeat="article in newsArticles.slice(((pagination.currentPage-1)*pagination.itemsPerPage), ((pagination.currentPage)*pagination.itemsPerPage))" class="table">
+    <a href="{{ article.url }}" target="_blank">
+        <img src=" {{ article.multimedia[0].url }} "> <span  class="artTitle"> {{ article.title }} </span>
+    </a>
+    <!-- <span> {{ article.url }} </span> -->
+    </li>
+</ul>
+
+<pagination total-items="newsArticles.length" ng-model="pagination.currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"></pagination>
+
+</div>
